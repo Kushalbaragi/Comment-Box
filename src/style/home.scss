@@ -1,0 +1,65 @@
+.logo-wrapper {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 0;
+    background-color: lightblue;
+    z-index: 3;
+    .logo {
+      width: 250px;
+    }
+  }
+  body{
+    background-color: #e8f2fe;
+  }
+  
+  .statement{
+    margin-top: 100px;
+  }
+  hr{
+    margin: 30px 0;
+  }
+  
+  .overview{
+    .h4{
+      font-weight: 600;
+    }
+  }
+  .comments{
+  margin: 40px 0 30px 0;
+  }
+
+.write-form{
+    p{
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    textarea{
+        min-height: 100px;
+        padding: 8px 12px;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    button{
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        font-size: 16px;
+        padding: 8px 40px;
+        margin: 10px 0 60px 0;
+        cursor: pointer;
+        &:disabled{
+            opacity: 0.5;
+            cursor: default;
+        }
+
+    }
+}
+  
+  

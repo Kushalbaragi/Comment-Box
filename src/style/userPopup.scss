@@ -1,0 +1,67 @@
+.userPop-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(97, 97, 97);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .userPop {
+    .container {
+      padding: 80px;
+      border-radius: 5px;
+      background-color: white;
+      text-align: center;
+      .user-wrapper {
+        display: flex;
+        gap: 15px;
+      }
+      p {
+        margin-bottom: 15px;
+      }
+      input {
+        // margin-right: 15px;
+        // margin-bottom: 15px;
+      }
+    }
+  }
+}
+
+.popup-wrapper {
+  text-align: center;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.144);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .popup {
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    padding: 40px 60px 30px 60px;
+    border-radius: 5px;
+
+    @media screen and (max-width: 991px) {
+      padding: 20px 40px;
+      width: 85%;
+      font-size: 18px;
+    }
+    textarea{
+    padding: 10px;
+    margin-bottom: 12px;
+    min-height: 50px;
+    min-width: 250px;
+    border-radius: 5px;
+    }
+    button{
+        padding: 5px 30px;
+    }
+  }
+}

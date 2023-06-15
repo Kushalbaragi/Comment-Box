@@ -1,33 +1,102 @@
 import React, { useState } from "react";
-import Popup from "./popup";
+import PopupEdit from "./PopupEdit";
+import PopupReply from "./PopupReply";
 
-function Comment({ comment, replies,deleteComment,editHandle}) {
+function Comment({
+  comment,
+  replies,
+  deleteComment,
+  editHandle,
+  replyHandler,
+  name
+}) {
+  let [popupEdit, setPopupEdit] = useState(false);
+  let [popupReply, setPopupReply] = useState(false);
 
-    let [popup,setPopup]=useState(false);
-  // console.log(comment);
+  function popupHandlerEdit() {
+    setPopupEdit(!popupEdit);
+  }
+
+  function popupHandleReply() {
+    setPopupReply(!popupReply);
+  }
   return (
     <>
-    <div className="comment-wrapper">
-      <img />
-      <p>{comment.id}</p>
-      <p>{comment.comment}</p>
-      <div className="action-wrapper">
-        <button>Reply</button>
-        <button onClick={()=>{setPopup(!popup)}}>Edit</button>
-        <button onClick={()=>{
-            deleteComment(comment.id)
-        }}>Delete</button>
+      <div className="comment-wrapper">
+        <div className="comment-wrapper-sub">
+          <div className="left">
+            <i className="fi fi-sr-user"></i>
+          </div>
+          <div className="right">
+              <span className="name">{comment.userName}</span>
+              <span className='date'>{comment.date}</span>
+              <span className='time'>{comment.time}</span>
 
+            <p className="comment">{comment.comment}</p>
+            <div className="action-wrapper">
+              <button
+                onClick={() => {
+                  setPopupReply(!popupReply);
+                }}
+                className="reply"
+              >
+                Reply
+              </button>
+              <button
+                onClick={() => {
+                  if (comment.userName !== name) {
+                    alert("Can't Edit others comment");
+                    return;
+                  } else {
+                    setPopupEdit(!popupEdit);
+                  }
+                }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => {
+                  deleteComment(comment.id);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="reply-wrapper">
+          {replies &&
+            replies.map((reply) => (
+              <Comment
+                key={reply.id}
+                comment={reply}
+                replies={[]}
+                deleteComment={deleteComment}
+                editHandle={editHandle}
+                replyHandler={replyHandler}
+                name={name}
+              />
+            ))}
+        </div>
       </div>
-      <div className="reply-wrapper">
-        {replies &&
-          replies.map((reply) => (
-            <Comment key={reply.id} comment={reply} replies={[]} deleteComment={deleteComment} editHandle={editHandle}/>
-          ))}
-      </div>
-    </div>
-    {popup &&  <Popup commentText={comment.comment} id={comment.id} editHandle={editHandle}/>}
-   
+      {popupEdit && (
+        <PopupEdit
+          commentText={comment.comment}
+          id={comment.id}
+          editHandle={editHandle}
+          popupHandler={popupHandlerEdit}
+          deleteComment={deleteComment}
+        />
+      )}
+      {popupReply && (
+        <PopupReply
+          commentText={comment.comment}
+          id={comment.id}
+          replyHandler={replyHandler}
+          popupHandler={popupHandleReply}
+          deleteComment={deleteComment}
+        />
+      )}
     </>
   );
 }
