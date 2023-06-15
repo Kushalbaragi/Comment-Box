@@ -1,43 +1,4 @@
-.reply-wrapper{
-    color: red;
-    padding-left: 30px;
-    background-color: yellow;
-}
-
-p{
-    margin: 0;
-}
-
-.popup-wrapper {
-    text-align: center;
-    z-index: 10;
-    transition-delay: 2s;
-  
-    i {
-      color: red;
-      font-size: 48px;
-      opacity: 0.8;
-      @media screen and (max-width: 991px) {
-      font-size: 32px;
-  
-      }
-  
-    }
-    .popup {
-      font-size: 24px;
-      background-color: white;
-      box-shadow: 5px 0 20px gray;
-      color: black;
-      padding: 50px 60px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      @media screen and (max-width: 991px) {
-        padding: 20px 40px;
-        width: 85%;
-        font-size: 18px;
-      }
-    }
-}
+@import './home.scss';
+@import './comment.scss';
+@import './popup.scss';
+@import './userPopup.scss'
