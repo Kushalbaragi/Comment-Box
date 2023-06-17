@@ -70,6 +70,8 @@ function Comment({
           comment={child}
           key={child.id}
           name={name}
+          editHandle={editHandle}
+          deleteComment={deleteComment}
           />
          })
         }
@@ -77,7 +79,7 @@ function Comment({
 
 
       </div>
-      {/* {popupEdit && (
+       {popupEdit && (
         <PopupEdit
           commentText={comment.comment}
           id={comment.id}
@@ -86,7 +88,7 @@ function Comment({
           deleteComment={deleteComment}
         />
       )}
-      {popupReply && (
+      {/* {popupReply && (
         <PopupReply
           commentText={comment.comment}
           id={comment.id}
@@ -94,7 +96,7 @@ function Comment({
           popupHandler={popupHandleReply}
           deleteComment={deleteComment}
         />
-      )} */}
+      )}  */}
     </>
   );
 }
