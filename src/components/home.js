@@ -14,24 +14,9 @@ function Home() {
   const [name, SetName] = useState("");
   const [userPopup, SetUserPopup] = useState(true);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("name")) {
-      SetUserPopup(false);
-      SetName(sessionStorage.getItem("name"));
-    }
-    let data = localStorage.getItem("data");
-    if (localStorage.getItem("data")) {
-      setComments(JSON.parse(data));
-    } else {
-      commentData().then((data) => setComments(data));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(comments));
-    return () => {
-      localStorage.setItem("data", JSON.stringify(comments));
-    };
-  }, [comments]);
+useEffect(()=>{
+  commentData().then((data)=>setComments(data))
+},[])
 
   function repliesfn(id) {
     return comments.filter((comment) => comment.parentId === id);
@@ -92,7 +77,7 @@ function Home() {
     if (text.length !== 0) {
       SetName(text);
       SetUserPopup(!userPopup);
-      sessionStorage.setItem("name", text);
+      // sessionStorage.setItem("name", text);
     }
   }
 
@@ -142,16 +127,13 @@ function Home() {
 
         <h2 className="comments">Comments</h2>
         <CommetForm handleSubmit={handleSubmit} />
-        {comments
-          .filter((comment) => comment.parentId === null)
-          .map((comment) => (
+        {comments.map((comment) => (
             <Comment
-              key={comment.id}
               comment={comment}
-              replies={repliesfn(comment.id)}
-              deleteComment={deleteComment}
-              editHandle={editHandle}
-              replyHandler={replyHandler}
+              key={comment.id}
+              // deleteComment={deleteComment}
+              // editHandle={editHandle}
+              // replyHandler={replyHandler}
               name={name}
             />
           ))}

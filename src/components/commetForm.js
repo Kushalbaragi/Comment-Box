@@ -20,7 +20,7 @@ function formSubmit(event){
         <textarea className='shadow-sm' placeholder='Write your comments here' value={text} ref={inputref} onChange={(e)=>{
             setText(e.target.value)
         }}></textarea>
-        <button disabled={isButtonDisabled}>Write</button>
+        <button disabled={isButtonDisabled}>Add Comment</button>
     </form>
   )
 }

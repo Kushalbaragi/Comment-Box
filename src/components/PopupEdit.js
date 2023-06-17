@@ -12,7 +12,7 @@ function PopupEdit({ commentText, id, editHandle,popupHandler,deleteComment }) {
   return (
     <div className="popup-wrapper">
       <div className="popup">
-       <textarea  value={text} onChange={(e)=>{setText(e.target.value)}}></textarea>
+       <textarea value={text} onChange={(e)=>{setText(e.target.value)}}></textarea>
         <button className='btn btn-primary' onClick={popupSubmit}>add</button>
       </div>
     </div>
