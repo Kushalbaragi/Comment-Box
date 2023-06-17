@@ -4,7 +4,6 @@ import PopupReply from "./PopupReply";
 
 function Comment({
   comment,
-  replies,
   deleteComment,
   editHandle,
   replyHandler,
@@ -64,22 +63,23 @@ function Comment({
             </div>
           </div>
         </div>
-        <div className="reply-wrapper">
-          {replies &&
-            replies.map((reply) => (
-              <Comment
-                key={reply.id}
-                comment={reply}
-                replies={[]}
-                deleteComment={deleteComment}
-                editHandle={editHandle}
-                replyHandler={replyHandler}
-                name={name}
-              />
-            ))}
+        <div style={{marginLeft:'30px'}}>
+        {comment.child.length>0 && 
+         comment.child.map(child=>{
+          return <Comment 
+          comment={child}
+          key={child.id}
+          name={name}
+          editHandle={editHandle}
+          deleteComment={deleteComment}
+          />
+         })
+        }
         </div>
+
+
       </div>
-      {popupEdit && (
+       {popupEdit && (
         <PopupEdit
           commentText={comment.comment}
           id={comment.id}
@@ -88,7 +88,7 @@ function Comment({
           deleteComment={deleteComment}
         />
       )}
-      {popupReply && (
+      {/* {popupReply && (
         <PopupReply
           commentText={comment.comment}
           id={comment.id}
@@ -96,7 +96,7 @@ function Comment({
           popupHandler={popupHandleReply}
           deleteComment={deleteComment}
         />
-      )}
+      )}  */}
     </>
   );
 }

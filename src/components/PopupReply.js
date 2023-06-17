@@ -16,7 +16,7 @@ function PopupReply({ id, replyHandler,popupHandler,deleteComment }) {
   return (
     <div className="popup-wrapper">
       <div className="popup">
-       <textarea  placeholder='Your Replpy here' value={text} onChange={(e)=>{setText(e.target.value)}}></textarea>
+       <textarea  autoFocus placeholder='Your Replpy here' value={text} onChange={(e)=>{setText(e.target.value)}}></textarea>
         <button className='btn btn-primary' onClick={popupSubmit}>add</button>
       </div>
     </div>

@@ -4,6 +4,11 @@ import {
   dateGenerator,
   logo,
   timeGenerator,
+  UUID,
+  findObj,
+  deleteObj,
+  editObj,
+  replyObj
 } from "../data/commentData";
 import Comment from "./comment";
 import CommetForm from "./commetForm";
@@ -14,61 +19,35 @@ function Home() {
   const [name, SetName] = useState("");
   const [userPopup, SetUserPopup] = useState(true);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("name")) {
-      SetUserPopup(false);
-      SetName(sessionStorage.getItem("name"));
-    }
-    let data = localStorage.getItem("data");
-    if (localStorage.getItem("data")) {
-      setComments(JSON.parse(data));
-    } else {
-      commentData().then((data) => setComments(data));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(comments));
-    return () => {
-      localStorage.setItem("data", JSON.stringify(comments));
-    };
-  }, [comments]);
-
+useEffect(()=>{
+  commentData().then((data)=>setComments(data))
+},[])
   function repliesfn(id) {
     return comments.filter((comment) => comment.parentId === id);
   }
 
   function handleSubmit(text) {
-    let id = Math.floor(Math.random() * 10000);
     let date = dateGenerator();
     let time = timeGenerator();
     setComments([
       {
-        id: id,
+        id: UUID(),
         userName: name,
         comment: text,
-        parentId: null,
         date: date,
         time: time,
+        child:[]
       },
       ...comments,
     ]);
   }
-
   function deleteComment(id) {
-    let index = comments.findIndex((a) => a.id === id);
-    if (comments[index].userName !== name) {
-      alert("Can't Delete others comment");
-      return;
-    } else {
-      setComments(comments.filter((a) => a.id !== id));
-    }
+
+console.log(deleteObj(comments,id));
   }
 
   function editHandle(text, id) {
-    let index = comments.findIndex((a) => a.id === id);
-      let updateArr = [...comments];
-      updateArr[index].comment = text;
-      setComments(updateArr);
+    editObj(comments,text,id);
   }
 
   function replyHandler(text, parentId) {
@@ -92,7 +71,7 @@ function Home() {
     if (text.length !== 0) {
       SetName(text);
       SetUserPopup(!userPopup);
-      sessionStorage.setItem("name", text);
+      // sessionStorage.setItem("name", text);
     }
   }
 
@@ -142,16 +121,13 @@ function Home() {
 
         <h2 className="comments">Comments</h2>
         <CommetForm handleSubmit={handleSubmit} />
-        {comments
-          .filter((comment) => comment.parentId === null)
-          .map((comment) => (
+        {comments.map((comment) => (
             <Comment
-              key={comment.id}
               comment={comment}
-              replies={repliesfn(comment.id)}
+              key={comment.id}
               deleteComment={deleteComment}
               editHandle={editHandle}
-              replyHandler={replyHandler}
+              // replyHandler={replyHandler}
               name={name}
             />
           ))}
