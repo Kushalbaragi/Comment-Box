@@ -72,6 +72,7 @@ function Comment({
           name={name}
           editHandle={editHandle}
           deleteComment={deleteComment}
+          replyHandler={replyHandler}
           />
          })
         }
@@ -88,15 +89,14 @@ function Comment({
           deleteComment={deleteComment}
         />
       )}
-      {/* {popupReply && (
+      {popupReply && (
         <PopupReply
           commentText={comment.comment}
           id={comment.id}
           replyHandler={replyHandler}
           popupHandler={popupHandleReply}
-          deleteComment={deleteComment}
         />
-      )}  */}
+      )} 
     </>
   );
 }

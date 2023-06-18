@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 
-function PopupReply({ id, replyHandler,popupHandler,deleteComment }) {
+function PopupReply({ id, replyHandler,popupHandler }) {
     let [text,setText]=useState('');
     
    function popupSubmit(){

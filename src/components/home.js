@@ -22,9 +22,6 @@ function Home() {
 useEffect(()=>{
   commentData().then((data)=>setComments(data))
 },[])
-  function repliesfn(id) {
-    return comments.filter((comment) => comment.parentId === id);
-  }
 
   function handleSubmit(text) {
     let date = dateGenerator();
@@ -50,21 +47,9 @@ console.log(deleteObj(comments,id));
     editObj(comments,text,id);
   }
 
-  function replyHandler(text, parentId) {
-    let id = Math.floor(Math.random() * 10000);
-    let date = dateGenerator();
-    let time = timeGenerator();
+  function replyHandler(commentReply, currentId) {
 
-    let reply = {
-      id: id,
-      comment: text,
-      userName: name,
-      parentId: parentId,
-      date: date,
-      time: time,
-    };
-
-    setComments([...comments, reply]);
+console.log(replyObj(comments,commentReply,currentId));
   }
 
   function nameSubmit(text) {
@@ -74,6 +59,8 @@ console.log(deleteObj(comments,id));
       // sessionStorage.setItem("name", text);
     }
   }
+  // // console.log(comments);
+  // commentData().then((data)=>console.log(data));
 
   return (
     <>
@@ -127,7 +114,7 @@ console.log(deleteObj(comments,id));
               key={comment.id}
               deleteComment={deleteComment}
               editHandle={editHandle}
-              // replyHandler={replyHandler}
+              replyHandler={replyHandler}
               name={name}
             />
           ))}
